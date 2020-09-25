@@ -1,4 +1,4 @@
-// Gathering HTML elements for manipulation
+// HTML elements
 var quizBody = document.getElementById("quiz");
 var resultsEl = document.getElementById("result");
 var finalScoreEl = document.getElementById("finalScore");
@@ -19,60 +19,61 @@ var buttonB = document.getElementById("b");
 var buttonC = document.getElementById("c");
 var buttonD = document.getElementById("d");
 
-// Quiz question object
+// Quiz questions
 var quizQuestions = [{
-    question: "How many elements can you apply an 'ID' attribute to?",
-    choiceA: "As many as you want",
-    choiceB: "3",
-    choiceC: "1",
-    choiceD: "128",
+    question: "Which elements are *NOT* condsidered semantic HTML?",
+    choiceA: "header",
+    choiceB: "nav",
+    choiceC: "div",
+    choiceD: "footer",
     correctAnswer: "c"},
   {
-    question: "What does DOM stand for?",
-    choiceA: "Document Object Model",
-    choiceB: "Display Object Management",
-    choiceC: "Digital Ordinance Model",
-    choiceD: "Desktop Oriented Mode",
+    question: "Which HTML tag lists items in a numerical sequence?",
+    choiceA: "ol",
+    choiceB: "li",
+    choiceC: "ul",
+    choiceD: "math.floor",
     correctAnswer: "a"},
    {
-    question: "What is used primarily to add styling to a web page?",
-    choiceA: "HTML",
-    choiceB: "CSS",
-    choiceC: "Python",
-    choiceD: "React.js",
+    question: "What does CSS stand for?",
+    choiceA: "Central Social Stylings ",
+    choiceB: "Cascading Style Sheets",
+    choiceC: "Computer Style Systems",
+    choiceD: "CPU Styling Solutions",
     correctAnswer: "b"},
     {
-    question: "What HTML tags are JavaScript code wrapped in?",
+    question: "Which is *NOT* used to assign colors in CSS?",
+    choiceA: "RGBA",
+    choiceB: "hex codes",
+    choiceC: "RGB",
+    choiceD: "paint shop pro",
+    correctAnswer: "d"},
+    {
+    question: "Which tag links JavaScript code into the HTML?",
     choiceA: "&lt;div&gt;",
     choiceB: "&lt;link&gt;",
     choiceC: "&lt;head&gt;",
     choiceD: "&lt;script&gt;",
-    correctAnswer: "d"},
+    correctAnswer: "d"},  
     {
-    question: "When is localStorage data cleared?",
-    choiceA: "No expiration time",
-    choiceB: "On page reload",
-    choiceC: "On browser close",
-    choiceD: "On computer restart",
-    correctAnswer: "a"},  
-    {
-    question: "What does WWW stand for?",
-    choiceA: "Web World Workings",
-    choiceB: "Weak Winter Wind",
-    choiceC: "World Wide Web",
-    choiceD: "Wendy Wants Waffles",
+    question: "Which method adds to the front of the array?",
+    choiceA: "splice",
+    choiceB: "push",
+    choiceC: "unshift",
+    choiceD: "pop",
     correctAnswer: "c"},
     {
-    question: "What HTML attribute references an external JavaScript file?",
-    choiceA: "href",
-    choiceB: "src",
-    choiceC: "class",
-    choiceD: "index",
+    question: "Which are not primitive datatypes?",
+    choiceA: "string",
+    choiceB: "undefined",
+    choiceC: "boolean",
+    choiceD: "number",
     correctAnswer: "b"},
         
     
     ];
-// Other global variables
+
+//Declare variables    
 var finalQuestionIndex = quizQuestions.length;
 var currentQuestionIndex = 0;
 var timeLeft = 76;
@@ -80,7 +81,7 @@ var timerInterval;
 var score = 0;
 var correct;
 
-// This function cycles through the object array containing the quiz questions to generate the questions and answers.
+//Define function
 function generateQuizQuestion(){
     gameoverDiv.style.display = "none";
     if (currentQuestionIndex === finalQuestionIndex){
@@ -94,7 +95,7 @@ function generateQuizQuestion(){
     buttonD.innerHTML = currentQuestion.choiceD;
 };
 
-// Start Quiz function starts the TimeRanges, hides the start button, and displays the first quiz question.
+//Starts quiz
 function startQuiz(){
     gameoverDiv.style.display = "none";
     startQuizDiv.style.display = "none";
@@ -112,7 +113,7 @@ function startQuiz(){
       }, 1000);
     quizBody.style.display = "block";
 }
-// This function is the end page screen that displays your score after either completeing the quiz or upon timer run out
+//Define function
 function showScore(){
     quizBody.style.display = "none"
     gameoverDiv.style.display = "flex";
@@ -121,8 +122,7 @@ function showScore(){
     finalScoreEl.innerHTML = "You got " + score + " out of " + quizQuestions.length + " correct!";
 }
 
-// On click of the submit button, we run the function highscore that saves and stringifies the array of high scores already saved in local stoage
-// as well as pushing the new user name and score into the array we are saving in local storage. Then it runs the function to show high scores.
+
 submitScoreBtn.addEventListener("click", function highscore(){
     
     
@@ -150,7 +150,7 @@ submitScoreBtn.addEventListener("click", function highscore(){
     
 });
 
-// This function clears the list for the high scores and generates a new high score list from local storage
+//High score list
 function generateHighscores(){
     highscoreDisplayName.innerHTML = "";
     highscoreDisplayScore.innerHTML = "";
@@ -165,7 +165,6 @@ function generateHighscores(){
     }
 }
 
-// This function displays the high scores page while hiding all of the other pages from 
 function showHighscore(){
     startQuizDiv.style.display = "none"
     gameoverDiv.style.display = "none";
@@ -176,14 +175,14 @@ function showHighscore(){
     generateHighscores();
 }
 
-// This function clears the local storage of the high scores as well as clearing the text from the high score board
+//Clears local stroage
 function clearScore(){
     window.localStorage.clear();
     highscoreDisplayName.textContent = "";
     highscoreDisplayScore.textContent = "";
 }
 
-// This function sets all the variables back to their original values and shows the home page to enable replay of the quiz
+//Reset
 function replayQuiz(){
     highscoreContainer.style.display = "none";
     gameoverDiv.style.display = "none";
@@ -193,21 +192,21 @@ function replayQuiz(){
     currentQuestionIndex = 0;
 }
 
-// This function checks the response to each answer 
+//Checks answwrs
 function checkAnswer(answer){
     correct = quizQuestions[currentQuestionIndex].correctAnswer;
 
     if (answer === correct && currentQuestionIndex !== finalQuestionIndex){
         score++;
-        alert("That Is Correct!");
+        alert("Great job! That's correct.");
         currentQuestionIndex++;
         generateQuizQuestion();
-        //display in the results div that the answer is correct.
+    
     }else if (answer !== correct && currentQuestionIndex !== finalQuestionIndex){
-        alert("That Is Incorrect.")
+        alert("Sorry, that was incorrect.")
         currentQuestionIndex++;
         generateQuizQuestion();
-        //display in the results div that the answer is wrong.
+    
     }else{
         showScore();
     }
